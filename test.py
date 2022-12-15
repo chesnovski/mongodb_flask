@@ -6,7 +6,7 @@ import datetime
 from firebase import* 
 import json
 import requests
-
+from mongodb import *
 
 a=5
     # INTERVAL_1_MINUTE = "1m"
@@ -44,15 +44,38 @@ def get_recommend(timer):
     recommend=output.get_analysis().summary["RECOMMENDATION"]
     return recommend
 
+
+def inser_text_doc(result,timer):
+    if timer==time_frame[0]:
+        collection=mydatabase.time_frame_15m
+        inserted_id=collection.insert_one(result).inserted_id
+        print(inserted_id)
+    elif timer==time_frame[1]:
+        collection=mydatabase.time_frame_1h
+        inserted_id=collection.insert_one(result).inserted_id
+        print(inserted_id)
+    elif timer==time_frame[2]:
+        collection=mydatabase.time_frame_4h
+        inserted_id=collection.insert_one(result).inserted_id
+        print(inserted_id)
+    elif timer==time_frame[3]:
+        collection=mydatabase.time_frame_1d
+        inserted_id=collection.insert_one(result).inserted_id
+        print(inserted_id)
+
+
+
  
 
   
 while(True):
-    symbols=['ETHUSDT', 'BNBUSDT', 'LTCUSDT', 'BTCUSDT','XRPUSDT','DOGEUSDT','LINKUSDT']
+    # symbols=['ETHUSDT', 'BNBUSDT', 'LTCUSDT', 'BTCUSDT','XRPUSDT','DOGEUSDT','LINKUSDT']
+    symbols=['ETHUSDT', 'BNBUSDT', 'LTCUSDT', 'BTCUSDT']
     key = "https://api.binance.com/api/v3/ticker/price?symbol="
     key2 = "https://api.binance.com/api/v3/ticker/24hr?symbol="
     date=datetime.datetime.now()
-    dt_string = date.strftime("%d-%m-%Y %H:%M")
+    dt_string_date = date.strftime("%d-%m-%Y")
+    df_string_time= date.strftime("%H:%M")
 
     j = 0
     for symbol in symbols:
@@ -63,14 +86,15 @@ while(True):
             for timer in time_frame:
 
                 recommend=get_recommend(timer)
-                result={'symbol':f'{symbol}', 'data':f'{dt_string}', 
+                result={'time frame':f'{timer}','symbol':f'{symbol}', 'date':f'{dt_string_date}', 'time':f'{df_string_time}',
                         'recomendation':f'{recommend}', 'price':f'{price}$',
                         'price change percent':f'{price_change_percent}%', 'high price': f'{high_price}$',
                         'low price':f'{low_price}$', 'high&curr':f'{high_curr}$', 'low&curr':f'{low_curr}$'}
+                inser_text_doc(result,timer)
                 # print(result)
-                #upload to the database
-                database.child(f'Curr_{timer}').child(f'{dt_string}').child(f'Coin_{symbol}').set(result)
-                print(result)
+                # #upload to the database
+                # database.child(f'Curr_{timer}').child(f'{dt_string}').child(f'Coin_{symbol}').set(result)
+                # print(result)
             j+=1
         
         

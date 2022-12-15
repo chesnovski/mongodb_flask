@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block info %}
+{{ super() }}
+<p>
+    {% for m in info %}
+    <!-- <li>{{m}}</li> -->
+    <p style="font-size: 1em; color: red;">Time frame={{m['time frame']}}</p>
+    <p >date={{m.date}}</p>
+    <p >time={{m.time}}</p>
+    <p >symbol={{m.symbol}}</p>
+    <p >recomendation={{m.recomendation}}</p>
+    <p >price={{m.price}}</p>
+    <p >price change percent={{m['price change percent']}}</p>
+    {% endfor %}
+</p>
+<!-- <p>
+    {% for m in info %}
+    <li>{{m}}</li>
+    <p class='card-text'>Time frame={{m['time frame']}}</p>
+    <p class='card-text'>{{m.symbol}}</p>
+    <p class='card-text'>{{m.recomendation}}</p>
+    <p class='card-text'>{{m.price}}</p>
+    {% endfor %}
+
+</p> -->
+{% endblock %}
