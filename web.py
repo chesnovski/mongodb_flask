@@ -30,7 +30,7 @@ def get_1h():
         inf['_id']=str(inf['_id'])
         inf['time']=str(inf['time'])
         info.append(inf)
-    return render_template('index.html', info=info[:4])
+    return render_template('index.html', info=info[:12])
 
 @app.route("/15m")
 def get_15m():
@@ -39,7 +39,7 @@ def get_15m():
         inf['_id']=str(inf['_id'])
         inf['time']=str(inf['time'])
         info.append(inf)
-    return render_template('index.html', info=info[:4])
+    return render_template('index.html', info=info[:12])
 
 @app.route("/4h")
 def get_4h():
@@ -48,7 +48,7 @@ def get_4h():
         inf['_id']=str(inf['_id'])
         inf['time']=str(inf['time'])
         info.append(inf)
-    return render_template('index.html', info=info[:4])
+    return render_template('index.html', info=info[:12])
 
 @app.route("/1d")
 def get_1d():
@@ -57,13 +57,13 @@ def get_1d():
         inf['_id']=str(inf['_id'])
         inf['time']=str(inf['time'])
         info.append(inf)
-    return render_template('index.html', info=info[:4])
+    return render_template('index.html', info=info[:12])
 
 
 
 @app.route('/services')
 def services():
-    return render_template('index.html')
+    return render_template('test.html')
 
 if __name__=='__main__':
     app.run(debug=True)

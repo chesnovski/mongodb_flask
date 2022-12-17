@@ -63,18 +63,13 @@
                     </div>
                 </nav>
                 <!-- Page content-->
-                <div class="container-fluid">
+                {% block info -%}
                     <h1 class="mt-4">Currency</h1>
-                    {% block mainimage -%}
-                      
-                    {% endblock -%}
-                    
-                    <div class="grid-container">
-                    {% block info -%}
-                      
-                    {% endblock -%}
+                    <div class="container-fluid">
+                
+                     
                     </div>
-                </div>
+                {% endblock  -%}
             </div>
         </div>
         <!-- Bootstrap core JS-->

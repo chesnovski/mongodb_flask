@@ -10,6 +10,8 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
+ 
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -235,9 +237,15 @@ sup {
 }
 
 a {
-  color: #0d6efd;
-  text-decoration: underline;
+  /* color: rgb(99, 89, 89); */
+  text-decoration: none;
 }
+
+p {
+  font-family: arial;
+  margin:0 
+}
+
 a:hover {
   color: #0a58ca;
 }
@@ -675,9 +683,18 @@ progress {
   margin-right: calc(-0.5 * var(--bs-gutter-x));
   margin-left: calc(-0.5 * var(--bs-gutter-x));
 }
+.main-wrapper{
+  background-image: url('https://images.hdqwalls.com/download/roller-coaster-4k-jh-1024x768.jpg');
+  height: 100%;
+
+}
 .grid-container {
+  font-size: 1.2em;
   display: grid;
-  grid-template-columns: 200px 200px 200px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+  row-gap: 50px;
+  padding-left: 100px;
 }
 .row > * {
   flex-shrink: 0;
@@ -7323,6 +7340,7 @@ textarea.form-control-lg {
 
 .mt-4 {
   margin-top: 1.5rem !important;
+  padding-left: 30px;
 }
 
 .mt-5 {

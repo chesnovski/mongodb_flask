@@ -1,16 +1,55 @@
 {% extends 'base.html' %}
 
-{% block mainimage %}
-{{ super() }}
-<img src="wallpaperflare.com_wallpaper.jpg" width="500" height="600"/>
-<!-- <p>
-    {% for m in info %}
+
+{% block info %}
+<!-- {{ super() }} -->
+
+<!-- <img src='https://images.hdqwalls.com/download/roller-coaster-4k-jh-1024x768.jpg' width="1500" height="600" /> -->
+<div class="main-wrapper">
+    <h1 class="mt-4">Currency</h1>
+    <div class="grid-container">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">15 minutes timeframe</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">text</p>
+              <a href="{{url_for('get_15m')}}" class="card-link text-muted">Show more</a>
+            </div>
+          </div>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">1 hour timeframe</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">text</p>
+              <a href="{{url_for('get_1h')}}" class="card-link text-muted">Show more</a>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">4 hours timeframe</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">text</p>
+              <a href="{{url_for('get_4h')}}" class="card-link text-muted">Show more</a>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">1 day timeframe</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">text.</p>
+              <a href="{{url_for('get_1d')}}" class="card-link text-muted">Show more</a>
+            </div>
+        </div>
+          
+    </div>
+
+
+    <!-- {% for m in info %}
     <li>{{m}}</li>
     <p class='card-text'>Time frame={{m['time frame']}}</p>
     <p class='card-text'>{{m.symbol}}</p>
     <p class='card-text'>{{m.recomendation}}</p>
     <p class='card-text'>{{m.price}}</p>
-    {% endfor %}
-
-</p> -->
+    {% endfor %} -->
+</div>
 {% endblock %}

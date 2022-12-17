@@ -2,18 +2,35 @@
 
 {% block info %}
 {{ super() }}
-<p>
-    {% for m in info %}
-    <!-- <li>{{m}}</li> -->
-    <p style="font-size: 1em; color: red;">Time frame={{m['time frame']}}</p>
-    <p >date={{m.date}}</p>
-    <p >time={{m.time}}</p>
-    <p >symbol={{m.symbol}}</p>
-    <p >recomendation={{m.recomendation}}</p>
-    <p >price={{m.price}}</p>
-    <p >price change percent={{m['price change percent']}}</p>
-    {% endfor %}
-</p>
+<!-- <div class="grid-container"> -->
+    <!-- {% for m in info %}
+    <li>{{m}}</li>
+    <p style="font-size: 1em; color: purple;">Time frame={{m['time frame']}}</p>
+    <p style="font-size: 1em; color: red;">symbol={{m.symbol}}</p>
+    <p> date={{m.date}}</p>
+    <p>time={{m.time}}</p>
+    <p>recomendation={{m.recomendation}}</p>
+    <p>price={{m.price}}</p>
+    <p>price change percent={{m['price change percent']}}</p>
+    {% endfor %} -->
+<!-- </div> -->
+<!-- <div class="grid-container"> -->
+<div class="grid-container">
+    {% for m in info %} 
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <p style=" color: purple;">Time frame={{m['time frame']}}</p>
+            <p style=" color: red;">symbol={{m.symbol}}</p>
+            <p> date={{m.date}}</p>
+            <p>time={{m.time}}</p>
+            <p>recomendation={{m.recomendation}}</p>
+            <p>price={{m.price}}</p>
+            <p>price change percent={{m['price change percent']}}</p>
+        </div>
+    </div>
+    {% endfor %} 
+
+</div>
 <!-- <p>
     {% for m in info %}
     <li>{{m}}</li>
