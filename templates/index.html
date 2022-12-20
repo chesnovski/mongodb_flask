@@ -1,5 +1,18 @@
 {% extends 'base.html' %}
 
+{% block head_menu %}
+<ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+    <li class="nav-item active"><a class="nav-link" href="{{url_for('get_timeframe_info', time='15m')}}">15m time frame</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{url_for('get_timeframe_info', time='1h')}}">1h time frame</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{url_for('get_timeframe_info', time='4h')}}">4h time frame</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{url_for('get_timeframe_info', time='1d')}}">1d time frame</a></li>
+
+
+</ul>
+
+{% endblock %}
+                
+
 {% block info %}
 {{ super() }}
 <!-- <div class="grid-container"> -->
@@ -17,17 +30,41 @@
 <!-- <div class="grid-container"> -->
 <div class="grid-container">
     {% for m in info %} 
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <p style=" color: purple;">Time frame={{m['time frame']}}</p>
-            <p style=" color: red;">symbol={{m.symbol}}</p>
-            <p> date={{m.date}}</p>
-            <p>time={{m.time}}</p>
-            <p>recomendation={{m.recomendation}}</p>
-            <p>price={{m.price}}</p>
-            <p>price change percent={{m['price change percent']}}</p>
-        </div>
-    </div>
+            <div class="card_2" >
+                <h2 class=" mb-2 bEYCUe">{{m.symbol[0:3]}} Price Statistics</h2>
+                <h6 class="card-subtitle mb-2 text-muted">Buy recommendation</h6>
+                <table>
+                    <tr>
+                      <th>date</th>
+                      <th>{{m.date}}</th>
+                    </tr>
+                    <tr>
+                      <td>time</td>
+                      <td>{{m.time}}</td>
+                    </tr>
+                    <tr>
+                      <td>recomendation</td>
+                      <td>{{m.recomendation}}</td>
+                    </tr>
+                    <tr>
+                        <td>price</td>
+                        <td>{{m.price}}</td>
+                      </tr>
+                  </table>
+                    <!-- <div class="card-body">
+                        <p style=" color: red;">Time frame={{m['time frame']}}</p>
+                        {% if m.symbol=='BTCUSDT'%}
+                            <i class="bi bi-currency-bitcoin" style="font-size:20px;">{{m.symbol}}</i>
+                        {% else %}
+                            <p >symbol={{m.symbol}}</p>
+                        {% endif %}
+                        <p> date={{m.date}}</p>
+                        <p>time={{m.time}}</p>
+                        <p style=" color: purple;">recomendation={{m.recomendation}}</p>
+                        <p>price={{m.price}}</p>
+                        <i class="bi bi-activity">price change percent={{m['price change percent']}}</i>
+                    </div> -->
+            </div>
     {% endfor %} 
 
 </div>
@@ -42,3 +79,5 @@
 
 </p> -->
 {% endblock %}
+
+

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 
+
 {% block info %}
 <!-- {{ super() }} -->
 
@@ -12,34 +13,34 @@
             <div class="card-body">
               <h5 class="card-title">15 minutes timeframe</h5>
               <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">text</p>
-              <a href="{{url_for('get_15m')}}" class="card-link text-muted">Show more</a>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="{{url_for('get_timeframe_info', time='15m')}}" class="stretched-link"></a>
             </div>
           </div>
         <div class="card" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title">1 hour timeframe</h5>
               <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">text</p>
-              <a href="{{url_for('get_1h')}}" class="card-link text-muted">Show more</a>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="{{url_for('get_timeframe_info', time='1h')}}" class="stretched-link"></a>
             </div>
         </div>
         <div class="card" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title">4 hours timeframe</h5>
               <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">text</p>
-              <a href="{{url_for('get_4h')}}" class="card-link text-muted">Show more</a>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="{{url_for('get_timeframe_info', time='4h')}}" class="stretched-link"></a>
             </div>
         </div>
         <div class="card" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title">1 day timeframe</h5>
               <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">text.</p>
-              <a href="{{url_for('get_1d')}}" class="card-link text-muted">Show more</a>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="{{url_for('get_timeframe_info', time='1d')}}" class="stretched-link"></a>
             </div>
-        </div>
+        </div> 
           
     </div>
 
@@ -51,5 +52,39 @@
     <p class='card-text'>{{m.recomendation}}</p>
     <p class='card-text'>{{m.price}}</p>
     {% endfor %} -->
+
 </div>
+{% block fear_info %}
+{% for m in fear_info %} 
+  {{m}}
+  <div class="grid-fear-index-container mb-2">
+    <div class="right-side_info" >
+      <h2 class=" mb-2 bEYCUe">Price Statistics</h2>
+      <h6 class="card-subtitle mb-2 text-muted">Buy recommendation</h6>
+      <table>
+          <tr>
+            <th>date</th>
+            <th>{{m['timestamp']}}</th>
+          </tr>
+          <tr>
+            <td>fear&greed index</td>
+            <td>{{m['value_classification']}}</td>
+          </tr>
+          <tr>
+              <td>fear&greed value</td>
+              <td>{{m['value']}}</td>
+            </tr>
+        </table>
+    </div>
+    <img src="https://alternative.me/crypto/fear-and-greed-index.png" >
+  </div>
+
+{% endfor %} 
 {% endblock %}
+{% endblock %} 
+
+
+
+
+
+

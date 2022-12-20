@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, url_for
 from mongodb import *
 import json
 from bson.objectid import ObjectId
@@ -9,61 +9,29 @@ import datetime
 date=datetime.datetime.now()
 dt_string_date = date.strftime("%d-%m-%Y")
 
-collection1h=mydatabase.time_frame_1h
-collection15m=mydatabase.time_frame_15m
-collection4h=mydatabase.time_frame_4h
-collection1d=mydatabase.time_frame_1d
+collection=mydatabase.binance_currency
+collection_fear=mydatabase.fear_index
 
 app = Flask(__name__)
 
-menu=['15 minutes', '1 hour', '4 hours', '1 day']
-
 @app.route("/")
 def get_info():
-    return render_template('main.html')
+    fear_info=[]
+    for f_info in collection_fear.find():
+        f_info['_id']=str(f_info['_id'])
+        f_info['timestamp'] =(datetime.datetime.fromtimestamp(int(f_info['timestamp']))).strftime("%d-%m-%Y")
+        fear_info.append(f_info)
+    return render_template('main.html', fear_info=fear_info[:1])
 
-
-@app.route("/1h")
-def get_1h():
+@app.route("/<time>")
+def get_timeframe_info(time):
     info=[]
-    for inf  in collection1h.find({'date':f'{dt_string_date}'}).sort("time", -1):
+    for inf  in collection.find({'time frame':f'{str(time)}'}).sort([("date", -1),("time", -1)]):
         inf['_id']=str(inf['_id'])
         inf['time']=str(inf['time'])
         info.append(inf)
     return render_template('index.html', info=info[:12])
-
-@app.route("/15m")
-def get_15m():
-    info=[]
-    for inf  in collection15m.find({'date':f'{dt_string_date}'}).sort("time", -1):
-        inf['_id']=str(inf['_id'])
-        inf['time']=str(inf['time'])
-        info.append(inf)
-    return render_template('index.html', info=info[:12])
-
-@app.route("/4h")
-def get_4h():
-    info=[]
-    for inf  in collection4h.find({'date':f'{dt_string_date}'}).sort("time", -1):
-        inf['_id']=str(inf['_id'])
-        inf['time']=str(inf['time'])
-        info.append(inf)
-    return render_template('index.html', info=info[:12])
-
-@app.route("/1d")
-def get_1d():
-    info=[]
-    for inf  in collection1d.find({'date':f'{dt_string_date}'}).sort("time", -1):
-        inf['_id']=str(inf['_id'])
-        inf['time']=str(inf['time'])
-        info.append(inf)
-    return render_template('index.html', info=info[:12])
-
-
-
-@app.route('/services')
-def services():
-    return render_template('test.html')
-
+# with app.test_request_context():
+#     print(url_for('get_in', time='1h'))
 if __name__=='__main__':
     app.run(debug=True)

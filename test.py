@@ -8,7 +8,7 @@ import json
 import requests
 from mongodb import *
 
-a=5
+
     # INTERVAL_1_MINUTE = "1m"
     # INTERVAL_5_MINUTES = "5m"
     # INTERVAL_15_MINUTES = "15m"
@@ -46,22 +46,45 @@ def get_recommend(timer):
 
 
 def inser_text_doc(result,timer):
-    if timer==time_frame[0]:
-        collection=mydatabase.time_frame_15m
-        inserted_id=collection.insert_one(result).inserted_id
-        print(inserted_id)
-    elif timer==time_frame[1]:
-        collection=mydatabase.time_frame_1h
-        inserted_id=collection.insert_one(result).inserted_id
-        print(inserted_id)
-    elif timer==time_frame[2]:
-        collection=mydatabase.time_frame_4h
-        inserted_id=collection.insert_one(result).inserted_id
-        print(inserted_id)
-    elif timer==time_frame[3]:
-        collection=mydatabase.time_frame_1d
-        inserted_id=collection.insert_one(result).inserted_id
-        print(inserted_id)
+    # if timer==time_frame[0]:
+    collection=mydatabase.binance_currency
+    inserted_id=collection.insert_one(result).inserted_id
+    print(inserted_id)
+
+def get_fear_index():
+    fear_index_api='https://api.alternative.me/fng/?limit=2'
+    fear_index=requests.get(fear_index_api)
+    fear_index=fear_index.json()
+    today_fear_index=fear_index['data'][0]
+    collection_fear=mydatabase.fear_index
+    inserted_fear_index=collection_fear.insert_one(today_fear_index).inserted_id
+    return inserted_fear_index, collection_fear
+    
+
+
+    # elif timer==time_frame[1]:
+    #     collection=mydatabase.time_frame_1h
+    #     inserted_id=collection.insert_one(result).inserted_id
+    #     print(inserted_id)
+    # elif timer==time_frame[2]:
+    #     collection=mydatabase.time_frame_4h
+    #     inserted_id=collection.insert_one(result).inserted_id
+    #     print(inserted_id)
+    # elif timer==time_frame[3]:
+    #     collection=mydatabase.time_frame_1d
+    #     inserted_id=collection.insert_one(result).inserted_id
+    #     print(inserted_id)
+inserted_fear_index, collection_fear=get_fear_index()
+
+fear_info=[]
+# info=collection_fear.distinct("data.0").sort({"timestamp":-1})
+info=collection_fear.aggregate( [ { '$unwind' : "$0" } ] )
+        # info['_id']=str(info['_id'])
+        # info['data.timestamp'] = str(datetime.date.fromtimestamp(info['timestamp']))
+print(info)
+fear_info.append(info)
+
+
 
 
 
@@ -96,6 +119,9 @@ while(True):
                 # database.child(f'Curr_{timer}').child(f'{dt_string}').child(f'Coin_{symbol}').set(result)
                 # print(result)
             j+=1
+    inserted_fear_index=get_fear_index()
+
+
         
         
 
