@@ -17,7 +17,7 @@ app = Flask(__name__)
 @app.route("/")
 def get_info():
     fear_info=[]
-    for f_info in collection_fear.find():
+    for f_info in collection_fear.find().sort('timestamp', -1):
         f_info['_id']=str(f_info['_id'])
         f_info['timestamp'] =(datetime.datetime.fromtimestamp(int(f_info['timestamp']))).strftime("%d-%m-%Y")
         fear_info.append(f_info)

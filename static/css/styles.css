@@ -643,16 +643,20 @@ progress {
 .container-md,
 .container-sm {
   width: 100%;
-  padding-right: var(--bs-gutter-x, 0.75rem);
-  padding-left: var(--bs-gutter-x, 0.75rem);
+  /* padding-right: var(--bs-gutter-x, 0.75rem);
+  padding-left: var(--bs-gutter-x, 0.75rem); */
   margin-right: auto;
   margin-left: auto;
+  /* padding: 25px 100px 75px 100px; */
+  padding-top: 50px;
+
 }
 
 @media (min-width: 576px) {
   .container-sm, .container {
     max-width: 540px;
   }
+  
 }
 @media (min-width: 768px) {
   .container-md, .container-sm, .container {
@@ -683,11 +687,7 @@ progress {
   margin-right: calc(-0.5 * var(--bs-gutter-x));
   margin-left: calc(-0.5 * var(--bs-gutter-x));
 }
-.main-wrapper{
-  /* background-image: url('https://images.hdqwalls.com/download/roller-coaster-4k-jh-1024x768.jpg');
-  height: 100%; */
 
-}
 
 .grid-fear-index-container {
   font-size: 1.2em;
@@ -711,6 +711,7 @@ progress {
   /* padding-left: 100px;
   padding-right: 100px; */
   padding: 25px 100px 75px 100px;
+  
 }
 .row > * {
   flex-shrink: 0;
@@ -718,7 +719,7 @@ progress {
   max-width: 100%;
   padding-right: calc(var(--bs-gutter-x) * 0.5);
   padding-left: calc(var(--bs-gutter-x) * 0.5);
-  margin-top: var(--bs-gutter-y);
+  margin-top: var(--bs-gutter-y * 0.5);
 }
 
 .col {
@@ -811,6 +812,7 @@ progress {
 .col-8 {
   flex: 0 0 auto;
   width: 66.66666667%;
+
 }
 
 .col-9 {
@@ -4561,8 +4563,8 @@ textarea.form-control-lg {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 1.5rem;
+  /* border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 1.5rem; */
   padding: 25px 25px 25px 25px;
 }
 
@@ -6919,6 +6921,11 @@ textarea.form-control-lg {
   transform: translateY(-50%) !important;
 }
 
+.border-main-menu{
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 1.5rem;
+}
+
 .border {
   border: 1px solid #dee2e6 !important;
 }
@@ -7993,7 +8000,7 @@ textarea.form-control-lg {
 }
 
 .rounded {
-  border-radius: 0.25rem !important;
+  border-radius: 1.5rem !important;
 }
 
 .rounded-0 {
