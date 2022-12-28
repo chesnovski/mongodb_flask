@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block head_menu %}
+<ul class="navbar-nav ms-2 mt-2 mt-lg-0 ">
+    <li class="nav-item active"><a class="nav-link" href="{{url_for('get_stocks_info', time='15m')}}">15m time frame</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{url_for('get_stocks_info', time='1h')}}">1h time frame</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{url_for('get_stocks_info', time='4h')}}">4h time frame</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{url_for('get_stocks_info', time='1d')}}">1d time frame</a></li>
+</ul>
+
+{% endblock %}
+
+{% block info %}
+{{ super() }}
+    <div class="container">
+        <div class="row col-md-12">
+            {% for m in stock_info %}
+                <div class="col-md-3 mb-4">
+                    <div class="card_2" >
+                        <h2 class=" mb-2 bEYCUe">{{m.symbol[0:3]}} Price Statistics</h2>
+                        <h6 class="card-subtitle mb-2 text-muted">Buy recommendation</h6>
+                        <table>
+                            <tr>
+                            <th>date</th>
+                            <th>{{m.date}}</th>
+                            </tr>
+                            <tr>
+                            <td>time</td>
+                            <td>{{m.time}}</td>
+                            </tr>
+                            <tr>
+                            <td>open price</td>
+                            <td>{{m['open price']}}</td>
+                            </tr>
+                            <tr>
+                                <td>current price</td>
+                                <td>{{m['current price']}}</td>
+                            </tr>
+                            <tr>
+                                <td>high price</td>
+                                <td>{{m['high price']}}</td>
+                            </tr>
+                            <tr>
+                                <td>low price</td>
+                                <td>{{m['low price']}}</td>
+                            </tr>
+                            <tr>
+                                <td>change price</td>
+                                <td>{{m['change price']}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+            
+
+    </div>
+
+
+<!-- <div class="grid-container">
+    <h2 class=" mb-2 bEYCUe"> Price Statistics</h2>
+    {% for m in stock_info %} 
+    {{m}}
+    {% endfor %} 
+
+</div> -->
+{% endblock %}

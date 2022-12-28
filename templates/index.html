@@ -13,26 +13,13 @@
 
 {% block info %}
 {{ super() }}
-<!-- <div class="grid-container"> -->
-    <!-- {% for m in info %}
-    <li>{{m}}</li>
-    <p style="font-size: 1em; color: purple;">Time frame={{m['time frame']}}</p>
-    <p style="font-size: 1em; color: red;">symbol={{m.symbol}}</p>
-    <p> date={{m.date}}</p>
-    <p>time={{m.time}}</p>
-    <p>recomendation={{m.recomendation}}</p>
-    <p>price={{m.price}}</p>
-    <p>price change percent={{m['price change percent']}}</p>
-    {% endfor %} -->
-<!-- </div> -->
-<!-- <div class="grid-container"> -->
-    <div class="container">
-        <div class="row col-md-12">
+    <div class = "container">
+        <div class = "row col-md-12">
             {% for m in info %}
-                <div class="col-md-3 mb-4">
-                    <div class="card_2" >
-                        <h2 class=" mb-2 bEYCUe">{{m.symbol[0:3]}} Price Statistics</h2>
-                        <h6 class="card-subtitle mb-2 text-muted">Buy recommendation</h6>
+                <div class = "col-md-3 mb-4">
+                    <div class = "card_2" >
+                        <h2 class = " mb-2 bEYCUe">{{m.symbol[0:3]}} Price Statistics</h2>
+                        <h6 class = "card-subtitle mb-2 text-muted">Buy recommendation</h6>
                         <table>
                             <tr>
                             <th>date</th>
@@ -55,11 +42,7 @@
                 </div>
             {% endfor %}
         </div>
-            
-    
     </div>
-
-
 {% endblock %}
 
 

@@ -5,25 +5,33 @@ from bson.objectid import ObjectId
 from flask import jsonify
 from flask import render_template
 import datetime
+from test2 import*
 
-date=datetime.datetime.now()
+date = datetime.datetime.now()
 dt_string_date = date.strftime("%d-%m-%Y")
 
-collection=mydatabase.binance_currency
-collection_fear=mydatabase.fear_index
+collection = mydatabase.binance_currency
+collection_fear = mydatabase.fear_index
+collection_stocks_currency = mydatabase.stocks_currency
 
 app = Flask(__name__)
 
+
 @app.route("/")
+def main():
+    return render_template('main.html')
+
+@app.route("/feargreed")
 def get_info():
     fear_info=[]
     for f_info in collection_fear.find().sort('timestamp', -1):
         f_info['_id']=str(f_info['_id'])
         f_info['timestamp'] =(datetime.datetime.fromtimestamp(int(f_info['timestamp']))).strftime("%d-%m-%Y")
         fear_info.append(f_info)
-    return render_template('main.html', fear_info=fear_info[:1])
+        print('ahaha')
+    return render_template('feargreed.html', fear_info=fear_info[:1])
 
-@app.route("/<time>")
+@app.route("/currency/<time>")
 def get_timeframe_info(time):
     info=[]
     for inf  in collection.find({'time frame':f'{str(time)}'}).sort([("date", -1),("time", -1)]):
@@ -31,6 +39,33 @@ def get_timeframe_info(time):
         inf['time']=str(inf['time'])
         info.append(inf)
     return render_template('index.html', info=info[:12])
+
+
+
+
+@app.route("/stocks/<time>")
+def get_stocks_info(time):
+    stock_info=[]
+    for inf  in collection_stocks_currency.find({'time frame':f'{str(time)}'}).sort([("date", -1),("time", -1)]):
+        inf['_id']=str(inf['_id'])
+        inf['time']=str(inf['time'])
+        stock_info.append(inf)
+    return render_template('stocks.html', stock_info=stock_info[:12])
+
+
+
+
+
+@app.route("/info")
+def get_coin_info():
+
+    for key,value in tags.items():
+        print(key, value)
+    
+    return render_template('test.html', tags=tags)
+
+
+
 # with app.test_request_context():
 #     print(url_for('get_in', time='1h'))
 if __name__=='__main__':
