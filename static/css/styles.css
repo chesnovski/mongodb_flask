@@ -4558,11 +4558,11 @@ textarea.form-control-lg {
   color: #fff;
 }
 
-.right-side_info {
+.right-side-info {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-width: 0;
+  min-width: 60px;
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
@@ -6927,6 +6927,8 @@ textarea.form-control-lg {
 .border-main-menu{
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 1.5rem;
+  position: relative;
+  display: flex;
 }
 
 .border {
