@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
 {% block head_menu %}
+
+
+
+
+
 <ul class="navbar-nav ms-2 mt-2 mt-lg-0 ">
     <li class="nav-item active"><a class="nav-link" href="{{url_for('get_stocks_info', time='15m')}}">15m time frame</a></li>
     <li class="nav-item"><a class="nav-link" href="{{url_for('get_stocks_info', time='1h')}}">1h time frame</a></li>
@@ -10,16 +15,53 @@
 
 {% endblock %}
 
+{% block date %}
+
+<div class="container">
+    <div class="row">
+        <h1 class="col-sm-8 ps-5 ">Currency</h1>
+       <div class='col-sm-4'>
+          <div class="form-group">
+            <form action="" method='POST' name="myform">
+                <div class="form-group">
+                    {{ form.csrt_token }}
+                    {{form.date(class='datepicker border p-2 rounded-3 ')}} {{form.hidden_tag()}}
+                    {{form.time_frame(class='border p-2 rounded-3 ')}}
+                    {{form.submit(class="btn btn-secondary mb-1")}}
+                </div>
+                
+                
+            </form>
+             
+          </div>
+       </div>
+       
+    </div>
+ </div>
+
+{% endblock %} -->
+
 {% block info %}
-{{ super() }}
-    <div class="container">
-        <div class="row col-md-12 ps-4">
+    <div class = "container pt-1">
+        <div class="row col-md-12 pe-3 pb-4">
+            <div class="col-lg-11">
+            </div>
+            <div class="col-lg-1 border  rounded-3 text-center">
+            {{time}}
+            </div>
+        </div>
+        <div class="row pb-4">
             {% for m in stock_info %}
-                <div class="col-md-3 mb-4">
+            
+                <div class="col-md-6 col-lg-4 mb-4">
                     <div class="card_2" >
-                        <h2 class=" mb-2 bEYCUe">{{m.symbol}} Price Statistics</h2>
-                        <h6 class="card-subtitle mb-2 text-muted">Buy recommendation</h6>
+                        <h2 class=" mb-2 bEYCUe"> Price Statistics</h2>
+                        <h6 class="card-subtitle mb-2 text-muted">{{m.name}}</h6>
                         <table>
+                            <tr>
+                                <th>symbol</th>
+                                <th>{{m.symbol}}</th>
+                            </tr>
                             <tr>
                             <th>date</th>
                             <th>{{m.date}}</th>
@@ -30,25 +72,37 @@
                             </tr>
                             <tr>
                             <td>open price</td>
-                            <td>{{m['open price']}}</td>
+                            <td>{{m['open price']}}$</td>
                             </tr>
                             <tr>
                                 <td>current price</td>
-                                <td>{{m['current price']}}</td>
+                                <td>{{m['current price']}}$</td>
                             </tr>
                             <tr>
                                 <td>high price</td>
-                                <td>{{m['high price']}}</td>
+                                <td>{{m['high price']}}$</td>
                             </tr>
                             <tr>
                                 <td>low price</td>
-                                <td>{{m['low price']}}</td>
+                                <td>{{m['low price']}}$</td>
                             </tr>
                             <tr>
                                 <td>change price</td>
-                                <td>{{m['change price']}}</td>
+                                {% if m['change price']|float > 0  %}
+                                    <td class="bg-success">{{m['change price']}}%</td>
+                                {% else %}
+                                    <td  class="bg-danger">{{m['change price']}}%</td>
+                                {% endif %}
+                            </tr>
+                            <tr>
+                                <td>exchange</td>
+                                <td>{{m['exchange']}}</td>
                             </tr>
                         </table>
+                    
+                            <a class="btn btn-secondary mt-2 "  href="{{url_for('get_coin_info', symbol=m['symbol'], exchange=m['exchange'])}}" role="button">Track market</a>
+                    
+                       
                     </div>
                 </div>
             {% endfor %}
@@ -58,11 +112,4 @@
     </div>
 
 
-<!-- <div class="grid-container">
-    <h2 class=" mb-2 bEYCUe"> Price Statistics</h2>
-    {% for m in stock_info %} 
-    {{m}}
-    {% endfor %} 
-
-</div> -->
 {% endblock %}

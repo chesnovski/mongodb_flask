@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block date %}
+<form action="/" method='POST' name="myform">
+    {{ form.csrt_token }}
+    {{ form.date.label }} {{form.date(class='datepicker')}} {{form.hidden_tag()}}
+    <p>
+    {{form.submit()}}
+    </p>
+</form>
+{% endblock %}

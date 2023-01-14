@@ -1,0 +1,12 @@
+name,stock_symbol,screener,exchange
+Nasdaq index,NDX,america,NASDAQ
+S&P 500 index,SPX,cfd,SP
+Dow Jones Industrial index,DJI,cfd,TVC
+DAX Perfomace index,DAX,cfd,XETR
+CAC 40 index,CAC40,cfd,TVC
+FTSE 100 Index,UKX,cfd,TVC
+CRUDE OIL (BRENT) index,UKOIL,cfd,FX
+Gold price,GOLD,cfd,TVC
+Silver price,SILVER,cfd,TVC
+Wheat Futures,ZW1!,america,CBOT
+Coffee Futures,KC1!,america,ICEUS

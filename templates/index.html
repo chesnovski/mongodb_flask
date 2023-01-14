@@ -9,35 +9,77 @@
 </ul>
 
 {% endblock %}
+
+{% block date %}
+
+<div class="container">
+    <div class="row">
+        <h1 class="col-sm-8 ps-5 ">Currency</h1>
+       <div class='col-sm-4'>
+          <div class="form-group">
+            <form action="" method='POST' name="myform">
+                {{ form.csrt_token }}
+                 {{form.date(class='datepicker border p-2 rounded-3 ')}} {{form.hidden_tag()}}
+                 {{form.time_frame(class='border p-2 rounded-3 ')}}
+                 {{form.submit(class="btn btn-secondary mb-1")}}
+            </form> 
+          </div>
+       </div>
+       
+    </div>
+ </div>
+
+{% endblock %}
                 
 
 {% block info %}
-{{ super() }}
-    <div class = "container">
-        <div class = "row col-md-12 ps-4">
+    <div class = "container pt-1">
+        <div class="row col-md-12 pe-3 pb-4">
+            <div class="col">
+            </div>
+            <div class="col-md-auto">
+            </div>
+            <div class="col-lg-1 border  rounded-3 text-center">
+                {{time}}
+            </div>
+          </div>
+        <div class = "row ps-4">
             {% for m in info %}
-                <div class = "col-md-3 mb-4">
+                <div class = "col-md-6 col-lg-3  mb-4">
                     <div class = "card_2" >
                         <h2 class = " mb-2 bEYCUe">{{m.symbol[0:3]}} Price Statistics</h2>
                         <h6 class = "card-subtitle mb-2 text-muted">Buy recommendation</h6>
                         <table>
                             <tr>
-                            <th>date</th>
-                            <th>{{m.date}}</th>
+                                <td>time</td>
+                                <td>{{m.time}}</td>
                             </tr>
                             <tr>
-                            <td>time</td>
-                            <td>{{m.time}}</td>
+                                <td>timeframe</td>
+                                <td>{{m['time frame']}}</td>
                             </tr>
                             <tr>
-                            <td>recomendation</td>
+                            <td>recommendation</td>
                             <td>{{m.recomendation}}</td>
                             </tr>
                             <tr>
                                 <td>price</td>
-                                <td>{{m.price}}</td>
+                                <td>{{m.price}}$</td>
+                            </tr>
+                            <tr>
+                                <td>change price</td>
+                                {% if m['price change percent']|float > 0  %}
+                                    <td class="bg-success">{{m['price change percent']}}%</td>
+                                {% else %}
+                                    <td  class="bg-danger">{{m['price change percent']}}%</td>
+                                {% endif %}
+                            </tr>
+                            <tr>
+                                <td>exchange</td>
+                                <td>{{m.exchange}}</td>
                             </tr>
                         </table>
+                        <a class="btn btn-secondary mt-2 "  href="{{url_for('get_coin_info', symbol=m['symbol'], exchange=m['exchange'])}}" role="button">Track market</a>
                     </div>
                 </div>
             {% endfor %}

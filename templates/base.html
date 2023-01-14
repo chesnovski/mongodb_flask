@@ -11,6 +11,7 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{{url_for('static', filename='css/styles.css')}}" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+        
 
     </head>
     <body>
@@ -18,10 +19,10 @@
         <div class="d-flex" id="wrapper">
             <!-- Sidebar-->
             <div class="border-end bg-white" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom bg-light">Currency view </div>
+                <div class="sidebar-heading border-bottom bg-light"><a class="link-secondary" href="{{url_for('main')}}">Currency view </a></div>
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{url_for('get_timeframe_info', time='15m')}}">Crypto Market</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{url_for('get_stocks_info', time='15m')}}">Stocks Market</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{url_for('get_timeframe_info')}}">Crypto Market</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{url_for('get_stocks_info')}}">Stocks Market</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{url_for('get_info')}}">Fear&Greed</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
@@ -34,8 +35,9 @@
                 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                     <div class="container-fluid">
                         {% block head_menu %}
-                        
+
                         {% endblock %}
+
 
                         <!-- <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
                         <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
@@ -59,8 +61,12 @@
                     </div>
                 </nav>
                 <!-- Page content-->
+                
+                {% block date %}
+                {% endblock %}
                 {% block info -%}
-                <h1 class="mt-4">Currency</h1>
+            
+
                 
                      
                 {% endblock  -%}
